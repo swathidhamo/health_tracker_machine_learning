@@ -88,8 +88,6 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="landing.php">Home</a></li>
-      <li><a href="forum.php">My forums</a></li>
-      <li><a href="diet.php">My diets</a></li>
       <li><a href = "#">Group name: <?php echo $title ?></a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
