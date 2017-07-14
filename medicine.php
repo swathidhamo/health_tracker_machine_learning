@@ -34,6 +34,8 @@
         $sql = mysqli_prepare($link,$query_create);
         mysqli_stmt_bind_param($sql,"siiis",$type,$score_1,$score_2,$score_3,$time);
         $result =  mysqli_stmt_execute($sql);
+
+        
         if($result){
           echo "Created the entry";
         }
@@ -114,112 +116,23 @@
       <p>Others (if any): <input type = "number" name = "score_4" max = "10" min = "0"></p>
 
     <input type = "submit" name = "entry" value = "Record entry">  
-    <input type = "submit" name = "search" value = "Search" id = "search">  
+    <input type = "submit" name = "search" value = "Search" id = "search"> 
+    <input type = "submit" name = "display" value = "display" id = "display"> 
+
+
   </div>
  </form>
- <script type="text/javascript">
- /*   function InfoSend(){
-          
-      
-         var xmlhttp = new XMLHttpRequest();
-         var parameter = "medicine=M1"
-         xmlhttp.open("POST", "display.php", true);
-         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-         xmlhttp.send(parameter);
-         xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {        
-            }
-        };
-         //THERE IS A CHANGE HERE BETWEEN GET AND POST
-         var request = new XMLHttpRequest();
-         document.getElementById("content").innerHTML = " work now ";
-         request.open('GET', 'r.json', true);
-         request.onload = function () {
-       // begin accessing JSON data here
-         var data = JSON.parse(this.responseText);
-         console.log(data.length);
-         var content = document.getElementById("content");
-  
-         for(var k = 0; k<data.length;k++){
-            if(data[k]["status"]==1){
-              if(data[k]["username"]==nameuser){
-                   content.innerHTML += 
-                  "<p class = 'info'>Entry by :  "+data[k]["username"]+"</p><p class = 'info'>   Title: "+
-                  data[k]["title"]+"  At: "+data[k]["time"]+ "  "+"</p><p id = 'contents'>  " 
-                   +data[k]["entry"] +"<p class = 'info'><a href = 'comments.php?id_comments="+
-                  data[k]["id"]+"'>Comments  </a>"+
-                   " Votes: "+data[k]["votes"]+"  "+
-                  "<a name  = 'vote'href='comments.php?id_vote="+data[k]["id"]+"'>Upvote</a></p></p>";
-            
-   
-              }
-              else{
-                 content.innerHTML += "<p class = 'info'>That is a private entry by " + 
-               data[k]["username"]+" </p>";
-              }
-            }
-           else{
-             content.innerHTML += 
-            "<p class = 'info'>Entry by :  "+data[k]["username"]+"</p><p class = 'info'>   Title: "+
-            data[k]["title"]+"  At: "+data[k]["time"]+ "  "+"</p><p id = 'contents'>   "
-             +data[k]["entry"] +"<p class = 'info'><a href = 'comments.php?id_comments="+data[k]["id"]+"'>Comments  </a>"+
-             " Votes: "+data[k]["votes"]+"  "+
-            "<a name  = 'vote'href='comments.php?id_vote="+data[k]["id"]+"'>Upvote</a></p></p>";
-        
-             }
-   
-          }
-    console.log(data[0]["title"]);
-  
-  
-}
-   
-       request.send();
-   
-          
-}
-     
-
-  //document.getElementById("search").addEventListener("click",infoSend);
-
-*/
-
-
-
-
-
-
- </script>
 
 <?php
-/*
-$list = array (
-    array('aaa', 'bbb', 'ccc', 'dddd'),
-    array('123', '456', '789'),
-    array('"aaa"', '"bbb"')
-);
 
-$fp = fopen('data.csv', 'w');
-
-foreach ($list as $fields) {
-    fputcsv($fp, $fields);
-}
-
-fclose($fp);
-
-*/
 
  
  if(isset($_POST["search"])){
       $medicine = "M1";
-     
-      //header('Content-Type: text/csv; charset=utf-8');  
-      //header('Content-Disposition: attachment; filename=data.csv');  
       $output = fopen("data.csv", "w");  
       
-      $query = "SELECT s_one,s_two,s_three FROM medication WHERE name = '$medicine' ";  
+      $query = "SELECT s_one,s_two,s_three,time FROM medication WHERE name = '$medicine' ";  
       $result = mysqli_query($link, $query);  
-      //$array = array("medicin","2","per");
       while($row = mysqli_fetch_assoc($result))  
       {      
         fputcsv($output, $row);  
@@ -228,29 +141,13 @@ fclose($fp);
       echo mysqli_error($link);
       fclose($output);  
  }
-  /*
 
-if(isset($_POST["search"])){
-  $medicine = "M1";
-  $query_show = "SELECT * FROM group_info";
-  $sql_display = mysqli_query($link,$query_show);
+ if(isset($_POST["display"])){
+  $input = fopen("getData.csv","r");
+  print_r(fgetcsv($input));
+  fclose($input);
 
-  if($sql_display){
-    $array= array();
-    while($rows = mysqli_fetch_assoc($sql_display)){
-      $array  = $rows;
-    }
-  }
-
-  $meh = file_put_contents("data.csv", $array); 
-
-
-}
-
-
-
-
-*/
+ }
 
 
 
