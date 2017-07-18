@@ -89,10 +89,6 @@ def main():
 	#findNoise("Boston_Housing.csv",noise)
 	#print noise
 
-	#with respect to the fit fuction what we try to do is just make it find out the linear coefficients that can 
-	#in turn do somethinng to predict more values like that
-	#but my entire flask and implementait
-
 	load('Boston_Housing.csv',x_parameters,y_parameters,x_test,y_test)
 	
 	x_parameter = np.matrix(x_parameters)
@@ -112,42 +108,9 @@ def main():
 	reg.fit(x_parameters,y_parameter)
 	print "Coefficinets", reg.coef_
 	
-	'''
-	b = np.array(y_parameters)
-	n = len(x_parameters)
-	c = np.array(x_parameters)
-	intercept = stats.linregress(c,b)
-	print "Scipy intercept ",intercept[0], "       ",intercept
-	answer_a = intercept[0]
-	answer_b = intercept[1]
-
-
-'''
-#    a=np.array(([[x_parameters[j], 1] for j in range(n)]))
- #   x = np.linalg.lstsq(c,b)
-
-	#answer_a = x[0]
-	#answer_b = x[1]
-	#print x_parameters,"      ",y_parameters      
-
-
-'''
-	for i in range((len(x_test)-1)):
-		prediction = predictTimePeriod(answer_a,answer_b,x_test[i])
-		y_prediction.append(prediction)
-		print prediction,"this is the actual value",y_test[i]
-
 	
 
-	y_value = 9
-	
-	print "Line is y = ",answer_a,"x+",answer_b
-	result = predictTimePeriod(answer_a,answer_b,y_value)
-	print "This is the result for least symptoms",result
-	writeData("getData.csv",result)
 
-
-'''
 
 
 
