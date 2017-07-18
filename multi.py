@@ -68,6 +68,7 @@ def main():
     #but my entire flask and implementait
 
     load('medicine.csv',x_parameters,y_parameters,x_test,y_test)
+    x_parameters.pop(0)
     x_parameter = np.matrix(x_parameters)
     y_parameter = np.matrix(y_parameters)
     reg = linear_model.LinearRegression();
